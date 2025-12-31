@@ -1,0 +1,155 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Permanent dark theme: disable custom dark variant */
+/* @custom-variant dark (&:is(.dark *)); */
+
+:root {
+  --font-sans: var(--font-inter-tight);
+  --font-serif: var(--font-manrope);
+  /* Permanent dark theme tokens */
+  --background: #1C1C21;
+  --foreground: #F7F3ED;
+  --card: #1F1F25;
+  --card-foreground: #F7F3ED;
+  --popover: #1C1C21;
+  --popover-foreground: #F7F3ED;
+  --primary: #DA8A16;
+  --primary-foreground: #1C1C21;
+  --secondary: #6D4BEF;
+  --secondary-foreground: #1C1C21;
+  --muted: #2A2A31;
+  --muted-foreground: #D0CBD4;
+  --accent: #6D4BEF;
+  --accent-foreground: #1C1C21;
+  --destructive: #EF4444;
+  --destructive-foreground: #F7F3ED;
+  --border: #2E2E36;
+  --input: #2A2A31;
+  --ring: #DA8A16;
+  --chart-1: #DA8A16;
+  --chart-2: #6D4BEF;
+  --chart-3: #EBAA62;
+  --chart-4: #F2C27B;
+  --chart-5: #3FBF6F;
+  --sidebar: #1C1C21;
+  --sidebar-foreground: #F7F3ED;
+  --sidebar-primary: #DA8A16;
+  --sidebar-primary-foreground: #1C1C21;
+  --sidebar-accent: #6D4BEF;
+  --sidebar-accent-foreground: #1C1C21;
+  --sidebar-border: #2E2E36;
+  --sidebar-ring: #DA8A16;
+  --visibility-text-scale: 1;
+  --visibility-contrast: 1;
+  --visibility-saturation: 1;
+  /* Force dark color scheme for form controls, scrollbars, etc. */
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-serif);
+  }
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    filter: contrast(var(--visibility-contrast)) saturate(var(--visibility-saturation));
+    transition: filter 250ms ease, color 250ms ease, background-color 250ms ease, font-size 250ms ease;
+    font-size: calc(1rem * var(--visibility-text-scale));
+    text-size-adjust: 100%;
+  }
+}
+
+[data-brightness="low"] {
+  --visibility-text-scale: 1.03;
+  --visibility-contrast: 1.08;
+  --visibility-saturation: 1.08;
+}
+
+[data-brightness="medium"] {
+  --visibility-text-scale: 1.04;
+  --visibility-contrast: 1.12;
+  --visibility-saturation: 1.1;
+}
+
+[data-brightness="high"] {
+  --visibility-text-scale: 1.06;
+  --visibility-contrast: 1.2;
+  --visibility-saturation: 1.15;
+}
+
+[data-contrast="more"] {
+  --visibility-text-scale: calc(var(--visibility-text-scale) * 1.05);
+  --visibility-contrast: calc(var(--visibility-contrast) * 1.2);
+}
+
+[data-hcm="active"] {
+  --visibility-text-scale: calc(var(--visibility-text-scale) * 1.08);
+  --visibility-contrast: calc(var(--visibility-contrast) * 1.3);
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-[10px] shadow-md bg-primary text-primary-foreground transition hover:bg-primary/90 text-sm font-medium;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-[10px] shadow-md border border-secondary text-secondary bg-white hover:bg-secondary/10 hover:text-secondary text-sm font-medium;
+  }
+  .admin-header .btn-secondary {
+    color: #000000 !important;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    font-weight: normal;
+  }
+  .admin-header .btn-secondary:hover {
+    color: #ffffff !important;
+    background-color: #000000 !important;
+    font-weight: normal;
+  }
+}
+  :root .bg-muted, :root .bg-muted * { color: black !important; color: #000000 !important; }
+  :root .bg-background, :root .bg-background * { color: black !important; color: #000000 !important; }
+  /* Ensure dark foreground on muted/background regardless of media preferences */
+  :root .bg-muted, :root .bg-muted * { color: white !important; color: #ffffff !important; }
+  :root .bg-background, :root .bg-background * { color: white !important; color: #ffffff !important; }
