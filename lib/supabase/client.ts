@@ -1,20 +1,19 @@
 import { createClient } from "@supabase/supabase-js"
 
-let client: ReturnType<typeof createClient> | null = null
+let serverClient: ReturnType<typeof createClient> | null = null
 
-export const getSupabase = () => {
-  if (!client) {
+export function getSupabase(): ReturnType<typeof createClient> | null {
+  if (!serverClient) {
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL
     const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
     if (!url || !key) return null
-    client = createClient(url, key)
+    serverClient = createClient(url, key)
   }
-  return client
+  return serverClient
 }
 
 export function getSupabaseBrowser() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL!
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  return createClient(url, key)
 }
