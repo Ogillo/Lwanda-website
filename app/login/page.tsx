@@ -21,12 +21,19 @@ export default function LoginPage() {
     setError("")
     try {
       const res = await fetch("/api/auth/login", { method: "POST", headers: { "Content-Type": "application/json", "x-csrf-token": csrf }, body: JSON.stringify({ identifier, password, remember }) })
-      const j = await res.json()
-      if (!res.ok) throw new Error(j.error || "Login failed")
+      const contentType = res.headers.get("content-type") || ""
+      let j: any = null
+      if (contentType.includes("application/json")) {
+        j = await res.json()
+      } else {
+        const txt = await res.text()
+        throw new Error("Unexpected server response. Please try again.")
+      }
+      if (!res.ok) throw new Error(j?.error || "Login failed")
       const next = new URLSearchParams(window.location.search).get("next") || "/admin"
       window.location.href = next
     } catch (e: any) {
-      setError(e.message || "Login failed")
+      setError(e?.message || "Login failed")
     } finally {
       setLoading(false)
     }
@@ -57,4 +64,3 @@ export default function LoginPage() {
     </div>
   )
 }
-
