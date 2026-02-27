@@ -558,7 +558,7 @@ export default function LeadershipManager() {
       )}
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="sm:max-w-[500px]">
+        <DialogContent className="max-w-[95vw] sm:max-w-[520px] overflow-hidden">
           <DialogHeader>
             <DialogTitle>{editingLeader ? "Edit Leader" : "Add Leader"}</DialogTitle>
           </DialogHeader>
@@ -622,7 +622,7 @@ export default function LeadershipManager() {
                     onChange={handleImageChange}
                 />
                 {editingLeader && editingLeader.image_path && !imageFile && (
-                    <p className="text-xs text-muted-foreground mt-1 truncate">Current: {editingLeader.image_path}</p>
+                    <p className="text-xs text-muted-foreground mt-1 whitespace-normal break-all">Current: {editingLeader.image_path}</p>
                 )}
             </div>
             
